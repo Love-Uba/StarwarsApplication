@@ -4,16 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dim_grayish_blue"
     tools:context="ui.SearchFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:layout_margin="8dp"
+        android:background="@null"
+        android:src="@drawable/ic_favorite_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_24dp"
+        android:text="Starwars Search"
+        android:textSize="@dimen/dimen_24sp"
+        android:textStyle="bold"
+        android:textColor="@color/vivid_yellow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchWrap"
+        android:backgroundTint="@color/white"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_48dp"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:background="@drawable/ic_background_with_stroke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+        <ImageButton
+            android:id="@+id/clearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:background="@null"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/searchLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_search" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchField"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:background="@null"
+            android:hint="Luke Skywalker"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/very_dark_gray"
+            android:textColorHint="@color/very_dark_gray_50"
+            android:textSize="@dimen/dimen_14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clearSearch"
+            app:layout_constraintStart_toEndOf="@+id/searchLogo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/vivid_yellow"
+        app:indicatorSize="@dimen/dimen_53dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/searchWrap"
+        app:trackColor="@color/dark_grayish_blue" />
+
+    <TextView
+        android:id="@+id/emptySearchTv"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_32dp"
+        android:layout_marginEnd="@dimen/dimen_32dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:text="Your search isn't in our record"
+        android:textAlignment="center"
+        android:textColor="@color/dark_grayish_blue"
+        android:textSize="@dimen/dimen_18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchWrap" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchList"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        tools:listitem="@layout/layout_search_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/searchWrap"
+        app:layout_constraintStart_toStartOf="@+id/searchWrap"
+        app:layout_constraintTop_toBottomOf="@+id/searchWrap" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
