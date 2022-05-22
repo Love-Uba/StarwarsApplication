@@ -3,6 +3,7 @@ package com.loveuba.starwarsapplication.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.loveuba.starwarsapplication.data.StarwarsService
+import com.loveuba.starwarsapplication.data.UnsafeOkHttpClient
 import com.loveuba.starwarsapplication.data.repository.SearchUseCase
 import com.loveuba.starwarsapplication.utils.UtilConstants.BASE_URL
 import dagger.Module
@@ -31,25 +32,33 @@ object AppModule {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
+//    @Provides
+//    @Singleton
+//    fun provideClient(
+//        logger: HttpLoggingInterceptor
+//    ): OkHttpClient {
+//        return OkHttpClient.Builder()
+//            .connectTimeout(30L, TimeUnit.SECONDS)
+//            .readTimeout(30L, TimeUnit.SECONDS)
+//            .writeTimeout(30L, TimeUnit.SECONDS)
+//            .addInterceptor(logger)
+//            .build()
+//    }
+
     @Provides
     @Singleton
     fun provideClient(
         logger: HttpLoggingInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .connectTimeout(30L, TimeUnit.SECONDS)
-            .readTimeout(30L, TimeUnit.SECONDS)
-            .writeTimeout(30L, TimeUnit.SECONDS)
-            .addInterceptor(logger)
-            .build()
+    ): UnsafeOkHttpClient {
+        return UnsafeOkHttpClient()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofitClient(okHttpClient: UnsafeOkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+            .client(okHttpClient.getUnsafeOkHttpClient()!!)
             .baseUrl(BASE_URL).build()
     }
 
