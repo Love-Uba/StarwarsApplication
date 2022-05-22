@@ -52,6 +52,10 @@ class SearchFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        bnd.likeSwitch.setOnClickListener {
+            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+        }
+
         bnd.searchField.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 input: CharSequence?,
