@@ -20,6 +20,7 @@ class SearchUseCase @Inject constructor(
                     emit(Result.success(response.body()!!.characters))
                 }
             } catch (ex: Exception) {
+                Log.d("ERRORTAG", "searchByCharacterName: ${ex.printStackTrace()}")
                 ex.printStackTrace()
             }
         }

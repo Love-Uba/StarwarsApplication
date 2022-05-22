@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loveuba.starwarsapplication.R
 import com.loveuba.starwarsapplication.databinding.FragmentSearchBinding
@@ -32,7 +33,6 @@ class SearchFragment : Fragment() {
     private val homeViewModel: StarwarsViewModel by viewModels()
     private val searchAdapter = SearchAdapter()
     private val characterSearchQuery = MutableStateFlow("")
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,6 +90,13 @@ class SearchFragment : Fragment() {
 
             }
         })
+
+        searchAdapter.setOnItemClickListener { position ->
+            val characters = searchAdapter.currentList[position]
+//            sharedViewModel.shareRetrieval(retrievals)
+            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+        }
+
         setUpViewModel()
 
     }
