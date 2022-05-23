@@ -7,19 +7,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.loveuba.starwarsapplication.data.models.CharacterData
+import com.loveuba.starwarsapplication.data.models.FilmData
+import com.loveuba.starwarsapplication.databinding.LayoutFilmItemBinding
 import com.loveuba.starwarsapplication.databinding.LayoutSearchItemBinding
+import kotlinx.android.synthetic.main.layout_film_item.view.*
 import kotlinx.android.synthetic.main.layout_search_item.view.*
 
-class SearchAdapter : ListAdapter<CharacterData, SearchAdapter.SearchViewHolder>(
-    object : DiffUtil.ItemCallback<CharacterData>() {
-        override fun areItemsTheSame(oldItem: CharacterData, newItem: CharacterData): Boolean =
-            oldItem.name == newItem.name
+class FilmsAdapter : ListAdapter<FilmData, FilmsAdapter.FilmViewHolder>(
+    object : DiffUtil.ItemCallback<FilmData>() {
+        override fun areItemsTheSame(oldItem: FilmData, newItem: FilmData): Boolean =
+            oldItem.title == newItem.title
 
-        override fun areContentsTheSame(oldItem: CharacterData, newItem: CharacterData): Boolean =
+        override fun areContentsTheSame(oldItem: FilmData, newItem: FilmData): Boolean =
             oldItem == newItem
     }
 ) {
-    class SearchViewHolder(
+    class FilmViewHolder(
         val containerView: View,
         onItemClickListener: ((position: Int) -> Unit)?
     ) : RecyclerView.ViewHolder(
@@ -34,9 +37,10 @@ class SearchAdapter : ListAdapter<CharacterData, SearchAdapter.SearchViewHolder>
             }
         }
 
-        fun bind(item: CharacterData) {
+        fun bind(item: FilmData) {
             item.run {
-                containerView.characterNameTv.text = item.name
+                containerView.filmTitleTv.text = item.title
+                containerView.FilmDescriptionTv.text = item.opening_crawl
             }
         }
     }
@@ -47,17 +51,17 @@ class SearchAdapter : ListAdapter<CharacterData, SearchAdapter.SearchViewHolder>
         this.onItemClickListener = onItemClickListener
     }
 
-    public override fun getItem(position: Int): CharacterData = super.getItem(position)
+    public override fun getItem(position: Int): FilmData = super.getItem(position)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val bnd = LayoutSearchItemBinding.inflate(layoutInflater, parent, false)
-        return SearchViewHolder(bnd.root, onItemClickListener)
+        val bnd = LayoutFilmItemBinding.inflate(layoutInflater, parent, false)
+        return FilmViewHolder(bnd.root, onItemClickListener)
 
     }
 
-    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

@@ -2,7 +2,7 @@ package com.loveuba.starwarsapplication.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CharacterResponse(
+data class FilmsResponse(
     @SerializedName("count")
     val count: Int,
     @SerializedName("next")
@@ -10,5 +10,5 @@ data class CharacterResponse(
     @SerializedName("previous")
     val previous: Any,
     @SerializedName("results")
-    val characters: List<CharacterData>
+    val films: List<FilmData>
 )

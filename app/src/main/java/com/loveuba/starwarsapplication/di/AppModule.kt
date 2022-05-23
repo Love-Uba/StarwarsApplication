@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.loveuba.starwarsapplication.data.StarwarsService
 import com.loveuba.starwarsapplication.data.UnsafeOkHttpClient
+import com.loveuba.starwarsapplication.data.repository.DetailsUseCase
+import com.loveuba.starwarsapplication.data.repository.FilmsUseCase
 import com.loveuba.starwarsapplication.data.repository.SearchUseCase
 import com.loveuba.starwarsapplication.utils.UtilConstants.BASE_URL
 import dagger.Module
@@ -32,33 +34,33 @@ object AppModule {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideClient(
-//        logger: HttpLoggingInterceptor
-//    ): OkHttpClient {
-//        return OkHttpClient.Builder()
-//            .connectTimeout(30L, TimeUnit.SECONDS)
-//            .readTimeout(30L, TimeUnit.SECONDS)
-//            .writeTimeout(30L, TimeUnit.SECONDS)
-//            .addInterceptor(logger)
-//            .build()
-//    }
-
     @Provides
     @Singleton
     fun provideClient(
         logger: HttpLoggingInterceptor
-    ): UnsafeOkHttpClient {
-        return UnsafeOkHttpClient()
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(30L, TimeUnit.SECONDS)
+            .readTimeout(30L, TimeUnit.SECONDS)
+            .writeTimeout(30L, TimeUnit.SECONDS)
+            .addInterceptor(logger)
+            .build()
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideClient(
+//        logger: HttpLoggingInterceptor
+//    ): UnsafeOkHttpClient {
+//        return UnsafeOkHttpClient()
+//    }
 
     @Singleton
     @Provides
-    fun provideRetrofitClient(okHttpClient: UnsafeOkHttpClient): Retrofit {
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient.getUnsafeOkHttpClient()!!)
+            .client(okHttpClient)
             .baseUrl(BASE_URL).build()
     }
 
@@ -69,5 +71,11 @@ object AppModule {
 
     @Provides
     fun provideSearchUseCase(apiService: StarwarsService) = SearchUseCase(apiService)
+
+    @Provides
+    fun provideDetailsUseCase(apiService: StarwarsService) = DetailsUseCase(apiService)
+
+    @Provides
+    fun provideFilmUseCase(apiService: StarwarsService) = FilmsUseCase(apiService)
 
 }

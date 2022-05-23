@@ -2,7 +2,7 @@ package com.loveuba.starwarsapplication.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Character(
+data class CharacterData(
     @SerializedName("birth_year")
     val birthYear: String,
     @SerializedName("created")

@@ -20,11 +20,10 @@ class CustomDetailItem @JvmOverloads constructor(
         ta.recycle()
     }
 
-    fun setDetailText(text : String){
+    fun setTitleText(text : String){
         detailTitleTv.text = text
     }
-
-    fun setTitleText(text : String){
+    fun setDetailText(text : String){
         mainDetailTv.text = text
     }
 }

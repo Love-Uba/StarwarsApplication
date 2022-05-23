@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.loveuba.starwarsapplication.R
 import com.loveuba.starwarsapplication.databinding.FragmentSearchBinding
 import com.loveuba.starwarsapplication.ui.adapter.SearchAdapter
 import com.loveuba.starwarsapplication.utils.Message
+import com.loveuba.starwarsapplication.viewmodel.SharedViewModel
 import com.loveuba.starwarsapplication.viewmodel.StarwarsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
@@ -28,9 +30,10 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    //Recyclerview visibility is on, manage functionality and delete comment only after handling that
+    //Recyclerview visibility is populated after search, clear viewmodel, manage functionality and delete comment only after handling that
     private lateinit var bnd: FragmentSearchBinding
     private val homeViewModel: StarwarsViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val searchAdapter = SearchAdapter()
     private val characterSearchQuery = MutableStateFlow("")
 
@@ -46,16 +49,26 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpView()
+        setUpViewModel()
+
+    }
+
+    fun setUpView() {
         bnd.searchList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchAdapter
             setHasFixedSize(true)
         }
 
-        bnd.likeSwitch.setOnClickListener {
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+        bnd.clearSearch.setOnClickListener {
+            bnd.searchField.text = null
+            bnd.emptySearchTv.visibility = View.GONE
         }
 
+        /**
+         * *Observe for changes in search field text
+         * */
         bnd.searchField.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 input: CharSequence?,
@@ -79,12 +92,10 @@ class SearchFragment : Fragment() {
                                 return@filter query.isNotBlank()
                             }
                             .distinctUntilChanged().collectLatest {
-//                                if (it.length >= 3) {
-                                    homeViewModel.actionSearch(query = it)
-//                                }
+                                homeViewModel.actionSearch(query = it)
                             }
                     }
-                }else{
+                } else {
                     //confirm this
                     searchAdapter.submitList(emptyList())
                 }
@@ -95,35 +106,44 @@ class SearchFragment : Fragment() {
             }
         })
 
+        /**
+         * *Shares selected character data with detail screen upon navigation
+         * */
         searchAdapter.setOnItemClickListener { position ->
-            val characters = searchAdapter.currentList[position]
-//            sharedViewModel.shareRetrieval(retrievals)
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment())
+            val character = searchAdapter.currentList[position]
+            sharedViewModel.shareCharacter(character)
+            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment(characterId = character.url))
         }
-
-        setUpViewModel()
-
     }
 
     fun setUpViewModel() {
+
+        /**
+         * Sets up ViewModel related requests to update view states
+         * */
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 homeViewModel.getSearchResult.collectLatest {
                     if (!it.isLoading) {
-                        bnd.progressView.visibility = View.GONE
-                        bnd.searchList.visibility = View.VISIBLE
-//                        if (it.characters.isEmpty()) {
-//                            bnd.emptySearchTv.visibility = View.VISIBLE
-//                        } else {
-//                            bnd.emptySearchTv.visibility = View.GONE
-//                        }
+                        if (!bnd.searchField.text.isNullOrBlank() && it.characters.isNullOrEmpty()) {
+                            bnd.emptySearchTv.visibility = View.VISIBLE
+                        } else {
+                            bnd.emptySearchTv.visibility = View.GONE
+                        }
                         searchAdapter.submitList(it.characters)
+                        bnd.searchList.visibility = View.VISIBLE
+
                         handleError(it.userMessages)
                     }
                 }
             }
         }
     }
+
+    /**
+     * Handle error state
+     * */
 
     private fun handleError(userMessage: List<Message>) {
         if (userMessage.isNotEmpty()) {

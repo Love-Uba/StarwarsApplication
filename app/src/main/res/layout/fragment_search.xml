@@ -81,19 +81,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        app:indicatorColor="@color/vivid_yellow"
-        app:indicatorSize="@dimen/dimen_53dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchWrap"
-        app:trackColor="@color/dark_grayish_blue" />
-
     <TextView
         android:id="@+id/emptySearchTv"
         android:layout_width="@dimen/dimen_0dp"
@@ -101,7 +88,7 @@
         android:layout_marginStart="@dimen/dimen_32dp"
         android:layout_marginEnd="@dimen/dimen_32dp"
         android:layout_marginBottom="@dimen/dimen_16dp"
-        android:text="Your search isn't in our record"
+        android:text="@string/no_item_warning"
         android:textAlignment="center"
         android:textColor="@color/dark_grayish_blue"
         android:textSize="@dimen/dimen_18sp"
@@ -116,6 +103,7 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
         android:layout_marginTop="@dimen/dimen_8dp"
+        android:visibility="gone"
         tools:listitem="@layout/layout_search_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/searchWrap"

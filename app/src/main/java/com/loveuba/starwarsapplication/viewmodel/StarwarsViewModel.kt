@@ -1,6 +1,5 @@
 package com.loveuba.starwarsapplication.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loveuba.starwarsapplication.data.repository.SearchUseCase
@@ -56,7 +55,6 @@ class StarwarsViewModel @Inject constructor(
                     }
                 }
             }
-
         }
     }
 

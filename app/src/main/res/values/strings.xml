@@ -2,4 +2,6 @@
     <string name="app_name">StarwarsApplication</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello Search fragment</string>
+    <string name="dummy_movie_summary">By default, the chips are reflowed across multiple lines. Set the app:singleLine attribute to constrain the chips to a single horizontal line. If you do so, you\'ll usually want to wrap this ChipGroup in a HorizontalScrollView</string>
+    <string name="no_item_warning">Your search isn\'t in our record</string>
 </resources>

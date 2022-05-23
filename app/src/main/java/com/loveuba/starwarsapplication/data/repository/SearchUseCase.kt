@@ -2,9 +2,8 @@ package com.loveuba.starwarsapplication.data.repository
 
 import android.util.Log
 import com.loveuba.starwarsapplication.data.StarwarsService
-import com.loveuba.starwarsapplication.data.models.Character
+import com.loveuba.starwarsapplication.data.models.CharacterData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -12,7 +11,7 @@ class SearchUseCase @Inject constructor(
     private val apiService: StarwarsService
 ) {
 
-    fun searchByCharacterName(query: String): Flow<Result<List<Character>>> =
+    fun searchByCharacterName(query: String): Flow<Result<List<CharacterData>>> =
         flow {
             try {
                 val response = apiService.searchCharacters(query)
