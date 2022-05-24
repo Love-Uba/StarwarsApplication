@@ -2,10 +2,10 @@
 
 The application follows Clean architecture guidelines, where each subpackage represents a layer in the architecture
 
-[x]Dependency Inject was done using hilt
-[x]Tests were written: Unit tests and Test for data layer
-[x]Navigation component was used with a single activity
-[x]The app flow provided in this Read Me
+* Dependency Inject was done using hilt
+* Tests were written: Unit tests and Test for data layer
+* Navigation component was used with a single activity
+* The app flow provided in this Read Me
 
 **Data Layer**
 
