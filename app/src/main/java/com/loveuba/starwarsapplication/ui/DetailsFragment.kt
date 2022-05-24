@@ -1,7 +1,6 @@
 package com.loveuba.starwarsapplication.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,17 +16,13 @@ import com.loveuba.starwarsapplication.data.models.FilmData
 import com.loveuba.starwarsapplication.data.wrapper.Result
 import com.loveuba.starwarsapplication.databinding.FragmentDetailsBinding
 import com.loveuba.starwarsapplication.ui.adapter.FilmsAdapter
-import com.loveuba.starwarsapplication.utils.addCountSuffix
-import com.loveuba.starwarsapplication.utils.centimeterToFeet
+import com.loveuba.starwarsapplication.utils.Util.addCountSuffix
+import com.loveuba.starwarsapplication.utils.Util.centimeterToFeet
 import com.loveuba.starwarsapplication.utils.toEndpoint
 import com.loveuba.starwarsapplication.viewmodel.DetailsViewModel
 import com.loveuba.starwarsapplication.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-
-//design fixings and optimize managing loading state
-//Documenting Processes
-//Write Tests
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {

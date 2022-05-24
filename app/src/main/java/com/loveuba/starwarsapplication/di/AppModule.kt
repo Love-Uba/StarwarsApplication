@@ -2,10 +2,10 @@ package com.loveuba.starwarsapplication.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.loveuba.starwarsapplication.BuildConfig.BASE_URL
 import com.loveuba.starwarsapplication.data.StarwarsService
-import com.loveuba.starwarsapplication.data.UnsafeOkHttpClient
-import com.loveuba.starwarsapplication.data.repository.*
-import com.loveuba.starwarsapplication.utils.UtilConstants.BASE_URL
+import com.loveuba.starwarsapplication.data.repository.IStarwarsRepository
+import com.loveuba.starwarsapplication.data.repository.StarwarsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,24 +1,16 @@
 package com.loveuba.starwarsapplication.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.loveuba.starwarsapplication.data.models.CharacterData
 import com.loveuba.starwarsapplication.data.models.FilmData
 import com.loveuba.starwarsapplication.data.models.PlanetData
 import com.loveuba.starwarsapplication.data.models.SpeciesData
 import com.loveuba.starwarsapplication.data.repository.DetailsUseCase
-import com.loveuba.starwarsapplication.data.repository.FilmsUseCase
 import com.loveuba.starwarsapplication.data.wrapper.Result
-import com.loveuba.starwarsapplication.ui.FilmUIState
-import com.loveuba.starwarsapplication.ui.SearchUIState
-import com.loveuba.starwarsapplication.utils.Message
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
