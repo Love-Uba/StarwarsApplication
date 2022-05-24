@@ -10,15 +10,15 @@ import javax.inject.Inject
 class FilmsUseCase @Inject constructor(
     private val apiService: StarwarsService
 ) {
-    fun getAllFilms() : Flow<Result<List<FilmData>>> =
-        flow {
-            try {
-                val response = apiService.getFilms()
-                if(response.body() != null) {
-                    emit(Result.success(response.body()!!.films))
-                }
-            }catch (ex: Exception){
-                ex.printStackTrace()
-            }
-        }
+//    fun getAllFilms() : Flow<Result<List<FilmData>>> =
+//        flow {
+//            try {
+//                val response = apiService.getFilms()
+//                if(response.body() != null) {
+//                    emit(Result.success(response.body()!!.films))
+//                }
+//            }catch (ex: Exception){
+//                ex.printStackTrace()
+//            }
+//        }
 }

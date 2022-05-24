@@ -1,26 +1,27 @@
 package com.loveuba.starwarsapplication.data.repository
 
-import android.util.Log
-import com.loveuba.starwarsapplication.data.StarwarsService
 import com.loveuba.starwarsapplication.data.models.CharacterData
+import com.loveuba.starwarsapplication.data.wrapper.Result
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class SearchUseCase @Inject constructor(
-    private val apiService: StarwarsService
+    private val starwarsRepository : IStarwarsRepository
 ) {
 
-    fun searchByCharacterName(query: String): Flow<Result<List<CharacterData>>> =
-        flow {
-            try {
-                val response = apiService.searchCharacters(query)
-                if (response.body() != null) {
-                    emit(Result.success(response.body()!!.characters))
-                }
-            } catch (ex: Exception) {
-                Log.d("ERRORTAG", "searchByCharacterName: ${ex.printStackTrace()}")
-                ex.printStackTrace()
-            }
-        }
+    suspend fun searchByCharacterName(query: String): Flow<Result<List<CharacterData>>> {
+        return starwarsRepository.fetchSearchCharacters(query)
+    }
+
+//    =
+//        flow {
+//            try {
+//                val response = apiService.searchCharacters(query)
+//                if (response.body() != null) {
+//                    emit(Result.success(response.body()!!.characters))
+//                }
+//            } catch (ex: Exception) {
+//                ex.printStackTrace()
+//            }
+//        }
 }

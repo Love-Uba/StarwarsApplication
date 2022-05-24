@@ -4,9 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.loveuba.starwarsapplication.data.StarwarsService
 import com.loveuba.starwarsapplication.data.UnsafeOkHttpClient
-import com.loveuba.starwarsapplication.data.repository.DetailsUseCase
-import com.loveuba.starwarsapplication.data.repository.FilmsUseCase
-import com.loveuba.starwarsapplication.data.repository.SearchUseCase
+import com.loveuba.starwarsapplication.data.repository.*
 import com.loveuba.starwarsapplication.utils.UtilConstants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -68,14 +66,17 @@ object AppModule {
     fun provideStarWarsService(retrofit: Retrofit): StarwarsService =
         retrofit.create(StarwarsService::class.java)
 
-
     @Provides
-    fun provideSearchUseCase(apiService: StarwarsService) = SearchUseCase(apiService)
+    @Singleton
+    fun provideStarwarsRepository(apiService: StarwarsService): IStarwarsRepository {
+        return StarwarsRepository(apiService)
+    }
 
-    @Provides
-    fun provideDetailsUseCase(apiService: StarwarsService) = DetailsUseCase(apiService)
-
-    @Provides
-    fun provideFilmUseCase(apiService: StarwarsService) = FilmsUseCase(apiService)
-
+//    @Provides
+//    fun provideSearchUseCase(starwarsRepository: IStarwarsRepository) =
+//        SearchUseCase(starwarsRepository)
+//
+//    @Provides
+//    fun provideDetailsUseCase(starwarsRepository: IStarwarsRepository) =
+//        DetailsUseCase(starwarsRepository)
 }

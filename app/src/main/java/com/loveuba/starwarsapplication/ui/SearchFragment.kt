@@ -18,6 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.loveuba.starwarsapplication.R
+import com.loveuba.starwarsapplication.data.wrapper.Result
 import com.loveuba.starwarsapplication.databinding.FragmentSearchBinding
 import com.loveuba.starwarsapplication.ui.adapter.SearchAdapter
 import com.loveuba.starwarsapplication.utils.Message
@@ -30,7 +31,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    //Recyclerview visibility is populated after search, clear viewmodel, manage functionality and delete comment only after handling that
     private lateinit var bnd: FragmentSearchBinding
     private val homeViewModel: StarwarsViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -96,7 +96,6 @@ class SearchFragment : Fragment() {
                             }
                     }
                 } else {
-                    //confirm this
                     searchAdapter.submitList(emptyList())
                 }
             }
@@ -112,7 +111,11 @@ class SearchFragment : Fragment() {
         searchAdapter.setOnItemClickListener { position ->
             val character = searchAdapter.currentList[position]
             sharedViewModel.shareCharacter(character)
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment(characterId = character.url))
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToDetailsFragment(
+                    characterId = character.url
+                )
+            )
         }
     }
 
@@ -121,35 +124,26 @@ class SearchFragment : Fragment() {
         /**
          * Sets up ViewModel related requests to update view states
          * */
+        lifecycleScope.launchWhenStarted {
+            homeViewModel.getSearchResult.collectLatest { result ->
+                when (result) {
+                    is Result.Loading -> {
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                homeViewModel.getSearchResult.collectLatest {
-                    if (!it.isLoading) {
-                        if (!bnd.searchField.text.isNullOrBlank() && it.characters.isNullOrEmpty()) {
+                    }
+                    is Result.Success -> {
+                        if (!bnd.searchField.text.isNullOrBlank() && result.data.isNullOrEmpty()) {
                             bnd.emptySearchTv.visibility = View.VISIBLE
                         } else {
                             bnd.emptySearchTv.visibility = View.GONE
                         }
-                        searchAdapter.submitList(it.characters)
+                        searchAdapter.submitList(result.data)
                         bnd.searchList.visibility = View.VISIBLE
+                    }
+                    else -> {
 
-                        handleError(it.userMessages)
                     }
                 }
             }
         }
     }
-
-    /**
-     * Handle error state
-     * */
-
-    private fun handleError(userMessage: List<Message>) {
-        if (userMessage.isNotEmpty()) {
-            Toast.makeText(requireContext(), userMessage.last().message, Toast.LENGTH_LONG).show()
-            homeViewModel.updateUserMessage(userMessage.last().id)
-        }
-    }
-
 }
