@@ -1,6 +1,5 @@
 package com.loveuba.starwarsapplication.ui
 
-import android.app.Application
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.loveuba.starwarsapplication.StarwarsApp
 import com.loveuba.starwarsapplication.data.wrapper.Result
 import com.loveuba.starwarsapplication.databinding.FragmentSearchBinding
 import com.loveuba.starwarsapplication.ui.adapter.SearchAdapter
@@ -146,7 +144,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun callNetworkConnection() {
-        checkNetworkConnection = NetworkConnectionCheck(Application())
+        checkNetworkConnection = NetworkConnectionCheck(activity?.applicationContext)
         checkNetworkConnection.observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
                 bnd.wholeWrap.visibility = View.VISIBLE
@@ -156,6 +154,7 @@ class SearchFragment : Fragment() {
                 bnd.networkWrap.visibility = View.VISIBLE
             }
         }
-
     }
+
+
 }

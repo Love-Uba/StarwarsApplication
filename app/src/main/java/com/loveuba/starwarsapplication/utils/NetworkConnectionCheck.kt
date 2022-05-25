@@ -1,7 +1,6 @@
 package com.loveuba.starwarsapplication.utils
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -10,10 +9,11 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 
+
 class NetworkConnectionCheck(private val connectivityManager: ConnectivityManager) :
     LiveData<Boolean>() {
 
-    constructor(application: Application) : this(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
+    constructor(application: Context?) : this(application?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
 
     private val networkCallback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
