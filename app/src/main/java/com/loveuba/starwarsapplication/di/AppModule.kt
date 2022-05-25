@@ -50,14 +50,6 @@ object AppModule {
             .build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideClient(
-//        logger: HttpLoggingInterceptor
-//    ): UnsafeOkHttpClient {
-//        return UnsafeOkHttpClient()
-//    }
-
     @Singleton
     @Provides
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
@@ -76,12 +68,4 @@ object AppModule {
     fun provideStarwarsRepository(apiService: StarwarsService): IStarwarsRepository {
         return StarwarsRepository(apiService)
     }
-
-//    @Provides
-//    fun provideSearchUseCase(starwarsRepository: IStarwarsRepository) =
-//        SearchUseCase(starwarsRepository)
-//
-//    @Provides
-//    fun provideDetailsUseCase(starwarsRepository: IStarwarsRepository) =
-//        DetailsUseCase(starwarsRepository)
 }
