@@ -28,5 +28,6 @@
     <color name="just_gray">#EEEEEE</color>
     <color name="off_white">#FAFAFA</color>
     <color name="sky_blue">#45C6DD</color>
+    <color name="sharp_blue">#426DEA</color>
     <color name="sky_blue_10">#1A45C6DD</color>
 </resources>

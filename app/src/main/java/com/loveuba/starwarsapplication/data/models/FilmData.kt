@@ -1,5 +1,7 @@
 package com.loveuba.starwarsapplication.data.models
 
+//Models the data gotten from the response for fetching all films
+
 data class FilmData(
     val characters: List<String>,
     val created: String,

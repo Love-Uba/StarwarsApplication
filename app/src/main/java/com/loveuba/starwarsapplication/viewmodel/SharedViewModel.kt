@@ -7,6 +7,10 @@ import com.loveuba.starwarsapplication.data.models.CharacterData
 
 class SharedViewModel : ViewModel() {
 
+    /**
+     * Shares the selected data of the character to the detail screen
+     * */
+
     private val _character = MutableLiveData<CharacterData>()
 
     val getCharacter: LiveData<CharacterData> = _character

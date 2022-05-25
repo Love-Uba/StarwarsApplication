@@ -1,5 +1,7 @@
 package com.loveuba.starwarsapplication.data.models
 
+//Models the data gotten from requesting a character's specie
+
 data class SpeciesData(
     val average_height: String,
     val average_lifespan: String,

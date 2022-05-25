@@ -5,12 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.loveuba.starwarsapplication.data.models.CharacterData
 import com.loveuba.starwarsapplication.data.repository.SearchUseCase
 import com.loveuba.starwarsapplication.data.wrapper.Result
-import com.loveuba.starwarsapplication.ui.SearchUIState
-import com.loveuba.starwarsapplication.utils.Message
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +18,8 @@ class StarwarsViewModel @Inject constructor(
 
     private var _requestedCharacter: MutableStateFlow<Result<List<CharacterData>>> =
         MutableStateFlow(Result.NotLoading(null))
-    val getSearchResult: StateFlow<Result<List<CharacterData>>> get() = _requestedCharacter
+    val getSearchResult: StateFlow<Result<List<CharacterData>>>
+        get() = _requestedCharacter
 
     fun actionSearch(query: String) = viewModelScope.launch {
         try {

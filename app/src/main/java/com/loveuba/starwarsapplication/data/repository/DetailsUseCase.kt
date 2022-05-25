@@ -22,35 +22,3 @@ class DetailsUseCase @Inject constructor(
         return starwarsRepository.fetchAllFilms()
     }
 }
-
-
-
-
-
-
-
-//    fun getCharacterPlanet(planetPath: String): Flow<Result<PlanetData>> =
-//        flow {
-//            try {
-//                val response = apiService.getPlanet(planetPath)
-//                if (response.body() != null) {
-//                    emit(Result.Success(response.body()!!))
-//                }
-//            } catch (ex: Exception) {
-//                Result.Error(ex.localizedMessage!!, null)
-//                ex.printStackTrace()
-//            }
-//        }
-
-//    fun getAllSpecies(speciesPath: String): Flow<Result<SpeciesData>> =
-//        flow {
-//            try {
-//                val response = apiService.getSpecies(speciesPath)
-//                if (response.body() != null) {
-//                    emit(Result.Success(response.body()!!))
-//                }
-//            } catch (ex: Exception) {
-//                Result.Error(ex.localizedMessage!!, null)
-//                ex.printStackTrace()
-//            }
-//        }

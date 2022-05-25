@@ -139,7 +139,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:subtitle="2019"
-                app:title="Birth\n Year" />
+                app:title="Birth\nYear" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline8"

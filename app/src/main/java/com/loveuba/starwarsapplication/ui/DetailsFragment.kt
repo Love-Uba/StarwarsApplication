@@ -29,10 +29,10 @@ class DetailsFragment : Fragment() {
     private lateinit var bnd: FragmentDetailsBinding
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val detailsViewModel: DetailsViewModel by viewModels()
+    private val args: DetailsFragmentArgs by navArgs()
     private val filmsAdapter = FilmsAdapter()
     private lateinit var planet: String
     private lateinit var species: String
-    private val args: DetailsFragmentArgs by navArgs()
     private var filmList = ArrayList<FilmData>()
 
     override fun onCreateView(
@@ -57,10 +57,13 @@ class DetailsFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+        /*Request for all films to later be filtered by selected character*/
+
         detailsViewModel.actionGetFilms()
 
         /**
-         * Observes the shared selected data from the search screen, use necessary data to request for other necessary data
+         * Observes the shared selected data from the search screen,
+         * use necessary data to request for other detail data not provided in initial request
          * */
 
         sharedViewModel.getCharacter.observe(viewLifecycleOwner) {
@@ -77,6 +80,10 @@ class DetailsFragment : Fragment() {
                 detailsViewModel.actionGetSpecies(species)
             }
         }
+
+        /**
+         * Provides the planet name and population of the character's planet
+         * */
 
         lifecycleScope.launchWhenStarted {
             detailsViewModel.getPlanetResult.collectLatest { result ->
@@ -104,6 +111,10 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        /**
+         * Observes the language of the given specie of the character
+         * */
+
         lifecycleScope.launchWhenStarted {
             detailsViewModel.getSpeciesResult.collectLatest { result ->
                 when (result) {
@@ -112,10 +123,16 @@ class DetailsFragment : Fragment() {
                     is Result.Success -> {
                         bnd.lanuageTv.text = result.data?.language ?: "N/A"
                     }
+                    else -> {}
                 }
             }
         }
 
+        /**
+         * The list of films received at this point is filtered
+         * by the character's presence in the film's character list item
+         * **/
+        
         lifecycleScope.launchWhenStarted {
             detailsViewModel.getFilmResult.collectLatest { result ->
 
@@ -136,9 +153,7 @@ class DetailsFragment : Fragment() {
                         }
                         filmsAdapter.submitList(filmList)
                     }
-                    else -> {
-
-                    }
+                    else -> {}
                 }
             }
         }

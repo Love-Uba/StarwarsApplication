@@ -1,5 +1,7 @@
 package com.loveuba.starwarsapplication.data.models
 
+//Models the data gotten from requesting a character's planet
+
 data class PlanetData(
     val climate: String,
     val created: String,

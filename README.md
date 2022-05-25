@@ -32,7 +32,7 @@ The App Flow:
 The search triggers a request providing a list of characters in the Starwars Universe, queried by name of the character.
 The selected character's data is exposed using a shared viewmodel to be observed by the detail screen
 This response shared doesnt contain all the required detail screen data,
-in some cases single URLs are provided as a link to the planet and species (planet name, specie name, population and language data)  
+in some cases single URLs are provided as a link to the planet and species (planet name, population and language data)  
 and in other cases as in the list of film, a list of url linking to the films is provided. In this lies the film title and opening_crawl data,
 which is gotten by making a full request for films in the Starwars Universe and filtered by the user's url in the character list putting efficiency 
 and space optimization into consideration.

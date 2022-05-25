@@ -46,22 +46,22 @@ class DetailsViewModelTest {
         testDispatcher.cancel()
     }
 
-//    @ExperimentalCoroutinesApi
-//    @Test
-//    fun `get user planet as a stateflow of specie result`() = runTest {
-//        detailsViewModel.actionGetPlanet("Naboo").join()
-//        val planetResult = detailsViewModel.getPlanetResult.first()
-//        Assert.assertEquals("Naboo", planetResult.data?.name)
-//
-//    }
-//
-//    @ExperimentalCoroutinesApi
-//    @Test
-//    fun `get selected specie as a stateflow of specie result`() = runTest {
-//        detailsViewModel.actionGetSpecies("").join()
-//        val specieResult = detailsViewModel.getSpeciesResult.first()
-//        Assert.assertEquals("Zabrak", specieResult.data?.name)
-//    }
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `get user planet as a stateflow of specie result`() = runTest {
+        detailsViewModel.actionGetPlanet("planets/8/").join()
+        val planetResult = detailsViewModel.getPlanetResult.value.data?.url
+        Assert.assertEquals("https://swapi.dev/api/planets/8/", planetResult)
+
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `get selected specie as a stateflow of specie result`() = runTest {
+        detailsViewModel.actionGetSpecies("species/22/").join()
+        val specieResult = detailsViewModel.getSpeciesResult.value.data?.url
+        Assert.assertEquals("https://swapi.dev/api/species/22/", specieResult)
+    }
 
     @ExperimentalCoroutinesApi
     @Test

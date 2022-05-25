@@ -2,6 +2,8 @@ package com.loveuba.starwarsapplication.data.models
 
 import com.google.gson.annotations.SerializedName
 
+//Models the data gotten from response of the character search request
+
 data class CharacterData(
     @SerializedName("birth_year")
     val birthYear: String,

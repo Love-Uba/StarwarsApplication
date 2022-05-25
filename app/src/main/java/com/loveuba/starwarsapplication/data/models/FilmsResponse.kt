@@ -2,6 +2,8 @@ package com.loveuba.starwarsapplication.data.models
 
 import com.google.gson.annotations.SerializedName
 
+//Models the response for fetching all films
+
 data class FilmsResponse(
     @SerializedName("count")
     val count: Int,
