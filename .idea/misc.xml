@@ -3,13 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/drawable-v24/ic_item_white_bg.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/curved_background.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/ic_favorite_icon.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/ic_item_white_bg.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/ic_movie.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.183" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/layout_custom_detail_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/layout_film_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_search_item.xml" value="0.28229166666666666" />
       </map>
     </option>

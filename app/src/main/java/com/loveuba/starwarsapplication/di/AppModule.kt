@@ -17,6 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+/**
+ * Provides all necessary classes in the application once,
+ * in order to be added with ease where necessary and managed in one place.
+ * */
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

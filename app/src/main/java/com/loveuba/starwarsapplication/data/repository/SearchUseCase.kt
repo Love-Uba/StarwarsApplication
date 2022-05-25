@@ -13,15 +13,4 @@ class SearchUseCase @Inject constructor(
         return starwarsRepository.fetchSearchCharacters(query)
     }
 
-//    =
-//        flow {
-//            try {
-//                val response = apiService.searchCharacters(query)
-//                if (response.body() != null) {
-//                    emit(Result.success(response.body()!!.characters))
-//                }
-//            } catch (ex: Exception) {
-//                ex.printStackTrace()
-//            }
-//        }
 }

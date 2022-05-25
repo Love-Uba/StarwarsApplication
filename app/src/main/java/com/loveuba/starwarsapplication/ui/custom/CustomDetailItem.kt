@@ -7,6 +7,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.loveuba.starwarsapplication.R
 import kotlinx.android.synthetic.main.layout_custom_detail_item.view.*
 
+//A custom item designed once and reused on the detail screen
+
 class CustomDetailItem @JvmOverloads constructor(
     context: Context, attributeSet: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyleAttr) {

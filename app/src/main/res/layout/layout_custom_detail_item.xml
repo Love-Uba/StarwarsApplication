@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardCornerRadius="@dimen/dimen_16dp"
-    android:backgroundTint="@color/dim_grayish_blue"
+    android:backgroundTint="@color/sharp_blue"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:text="Language"
             android:gravity="center"
-            android:textColor="@color/very_dark_gray"
+            android:textStyle="bold"
+            android:textColor="@color/off_white"
             android:textSize="@dimen/dimen_17sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Swahili"
-            android:textColor="@color/very_dark_gray"
+            android:textColor="@color/white"
             android:textSize="@dimen/dimen_17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

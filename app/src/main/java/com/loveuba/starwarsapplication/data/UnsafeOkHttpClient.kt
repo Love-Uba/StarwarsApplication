@@ -1,9 +1,13 @@
 package com.loveuba.starwarsapplication.data
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.*
+import javax.security.cert.CertificateException
 //import javax.net.ssl.TrustManager
 //import javax.net.ssl.X509TrustManager
-//import javax.security.cert.CertificateException
-//import javax.security.cert.X509Certificate
 //
 //
 //val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
@@ -26,19 +30,7 @@ package com.loveuba.starwarsapplication.data
 //)
 
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import java.security.SecureRandom
-import java.security.cert.X509Certificate
-import javax.net.ssl.*
-import javax.security.cert.CertificateException
-
-
 class UnsafeOkHttpClient {
-
-//    fun addInterceptor(interceptor: HttpLoggingInterceptor) : HttpLoggingInterceptor {
-//        return HttpLoggingInterceptor.Level.BODY
-//    }
 
     fun getUnsafeOkHttpClient(): OkHttpClient? {
 
