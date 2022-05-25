@@ -6,6 +6,7 @@ The application follows Clean architecture guidelines, where each subpackage rep
 * Tests were written: Unit tests and Test for data layer
 * Navigation component was used with a single activity
 * The app flow provided in this Read Me
+* Network Connectivity Check since application is currently only available online unless feature addition requires otherwise.
 
 **Data Layer**
 

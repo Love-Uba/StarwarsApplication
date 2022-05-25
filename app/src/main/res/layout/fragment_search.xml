@@ -7,107 +7,160 @@
     android:background="@color/dim_grayish_blue"
     tools:context="ui.SearchFragment">
 
-    <ImageButton
-        android:id="@+id/likeSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@null"
-        android:src="@drawable/ic_favorite_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_24dp"
-        android:text="Starwars Search"
-        android:textSize="@dimen/dimen_24sp"
-        android:textStyle="bold"
-        android:textColor="@color/vivid_yellow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/likeSwitch" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/searchWrap"
-        android:backgroundTint="@color/white"
+        android:id="@+id/wholeWrap"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_48dp"
-        android:layout_margin="@dimen/dimen_16dp"
-        android:background="@drawable/ic_background_with_stroke"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_text">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/clearSearch"
+            android:id="@+id/likeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:layout_margin="8dp"
             android:background="@null"
-            android:src="@drawable/ic_close"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_favorite_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/searchLogo"
+        <TextView
+            android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/dimen_24dp"
+            android:text="Starwars Universe Search"
+            android:textColor="@color/vivid_yellow"
+            android:textSize="@dimen/dimen_24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_search" />
+            app:layout_constraintTop_toBottomOf="@+id/likeSwitch" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchField"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchWrap"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:background="@drawable/ic_background_with_stroke"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+            <ImageButton
+                android:id="@+id/clearSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:background="@null"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/searchLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_search" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchField"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:background="@null"
+                android:hint="Luke Skywalker"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/very_dark_gray"
+                android:textColorHint="@color/very_dark_gray_50"
+                android:textSize="@dimen/dimen_14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/clearSearch"
+                app:layout_constraintStart_toEndOf="@+id/searchLogo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/emptySearchTv"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_32dp"
+            android:layout_marginEnd="@dimen/dimen_32dp"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:text="@string/no_item_warning"
+            android:textAlignment="center"
+            android:textColor="@color/dark_grayish_blue"
+            android:textSize="@dimen/dimen_18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchWrap" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchList"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_0dp"
-            android:layout_marginStart="@dimen/dimen_8dp"
-            android:layout_marginEnd="@dimen/dimen_8dp"
-            android:background="@null"
-            android:hint="Luke Skywalker"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/very_dark_gray"
-            android:textColorHint="@color/very_dark_gray_50"
-            android:textSize="@dimen/dimen_14sp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clearSearch"
-            app:layout_constraintStart_toEndOf="@+id/searchLogo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/searchWrap"
+            app:layout_constraintStart_toStartOf="@+id/searchWrap"
+            app:layout_constraintTop_toBottomOf="@+id/searchWrap"
+            tools:listitem="@layout/layout_search_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/emptySearchTv"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_32dp"
-        android:layout_marginEnd="@dimen/dimen_32dp"
-        android:layout_marginBottom="@dimen/dimen_16dp"
-        android:text="@string/no_item_warning"
-        android:textAlignment="center"
-        android:textColor="@color/dark_grayish_blue"
-        android:textSize="@dimen/dimen_18sp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/networkWrap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchWrap" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchList"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="@dimen/dimen_0dp"
-        android:layout_marginTop="@dimen/dimen_8dp"
-        android:visibility="gone"
-        tools:listitem="@layout/layout_search_item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/searchWrap"
-        app:layout_constraintStart_toStartOf="@+id/searchWrap"
-        app:layout_constraintTop_toBottomOf="@+id/searchWrap" />
+        <ImageView
+            android:id="@+id/networkIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_internet"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/networkWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#A17373"
+            android:textStyle="bold"
+            android:text="No Network Connection, please check your settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/networkIcon"
+            app:layout_constraintStart_toStartOf="@id/networkIcon"
+            app:layout_constraintTop_toBottomOf="@+id/networkIcon" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="352dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
