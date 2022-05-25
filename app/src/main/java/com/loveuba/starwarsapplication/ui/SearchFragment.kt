@@ -1,5 +1,6 @@
 package com.loveuba.starwarsapplication.ui
 
+import android.app.Application
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,9 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.loveuba.starwarsapplication.StarwarsApp
 import com.loveuba.starwarsapplication.data.wrapper.Result
 import com.loveuba.starwarsapplication.databinding.FragmentSearchBinding
 import com.loveuba.starwarsapplication.ui.adapter.SearchAdapter
+import com.loveuba.starwarsapplication.utils.NetworkConnectionCheck
 import com.loveuba.starwarsapplication.viewmodel.SharedViewModel
 import com.loveuba.starwarsapplication.viewmodel.StarwarsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +32,8 @@ class SearchFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val searchAdapter = SearchAdapter()
     private val characterSearchQuery = MutableStateFlow("")
+    private lateinit var checkNetworkConnection: NetworkConnectionCheck
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +49,7 @@ class SearchFragment : Fragment() {
 
         setUpView()
         setUpViewModel()
-
+        callNetworkConnection()
     }
 
     fun setUpView() {
@@ -138,5 +143,19 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun callNetworkConnection() {
+        checkNetworkConnection = NetworkConnectionCheck(Application())
+        checkNetworkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                bnd.wholeWrap.visibility = View.VISIBLE
+                bnd.networkWrap.visibility = View.GONE
+            } else {
+                bnd.wholeWrap.visibility = View.GONE
+                bnd.networkWrap.visibility = View.VISIBLE
+            }
+        }
+
     }
 }
